@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
-const API = 'https://securevault-aditi.duckdns.org'
+const API = 'https://securevault-qci0.onrender.com'
 
 export default function Dashboard() {
   const [data, setData] = useState<any>(null)
