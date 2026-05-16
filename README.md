@@ -1,38 +1,80 @@
-# SecureVault
+# SecureVault 🔐
 
-A full-stack Role-Based Access Control (RBAC) web app I built as part of my application for the HENNGE Global Internship Program. The idea was to simulate how enterprise tools like HENNGE ONE manage secure access to cloud resources — different users get different levels of access based on their role.
+A Role-Based Access Control (RBAC) web app I built for my HENNGE Global Internship application. The idea was simple — simulate how enterprise tools like HENNGE ONE handle secure access. Different users, different roles, different resources. No JWT token? No access.
 
-**Live demo:** https://securevault-amber.vercel.app  
-**Backend API:** https://securevault-qci0.onrender.com/docs
-
----
-
-## What it does
-
-Users can register with one of three roles — admin, editor, or viewer. Once logged in, they see only the resources their role allows. Admins get access to an additional admin panel with system controls. The whole thing is protected with JWT tokens so you can't access anything without logging in first.
+**Live:** https://securevault-amber.vercel.app  
+**API Docs:** https://securevault-qci0.onrender.com/docs
 
 ---
 
-## Tech stack
+## How it works
+
+You register with a role (Admin, Editor, or Viewer). After login, you only see what your role allows. Admins get an extra panel with system controls. Everything is behind JWT authentication.
+
+---
+
+## Screenshots
+
+**Register — pick your role at signup**
+
+![Register](register.png)
+
+**Login page**
+
+![Login](login.png)
+
+**After registering, redirects to login with a success message**
+
+![Login after register](login_success.png)
+
+---
+
+**Viewer dashboard — only `view-files`**
+
+![Viewer dashboard](viewer_dashboard.png)
+
+**Editor dashboard — gets `edit-files`, `view-files`, and `analytics`**
+
+![Editor dashboard](editor_dashboard.png)
+
+**Admin dashboard — full access + Admin Panel button**
+
+![Admin dashboard](admin_dashboard.png)
+
+**Admin Panel — Manage Users, View Analytics, System Settings, Security Logs**
+
+![Admin panel](admin_panel.png)
+
+---
+
+## Role permissions
+
+| Role | What they can access |
+|------|----------------------|
+| Admin | user-management, all-files, settings, analytics + admin panel |
+| Editor | edit-files, view-files, analytics |
+| Viewer | view-files |
+
+---
+
+## Stack
 
 **Backend**
-- Python + FastAPI
-- JWT authentication (via python-jose)
-- Password hashing with bcrypt
-- SQLite database using SQLAlchemy
-- Pytest for testing (12 tests, all passing)
+- FastAPI + Python
+- JWT auth with `python-jose`
+- `bcrypt` for password hashing
+- SQLite via SQLAlchemy
+- Pytest — 12 tests, all passing
 
 **Frontend**
 - React + TypeScript
-- Vite for bundling
-- Axios for API calls
-- React Router for navigation
+- Vite
+- Axios + React Router
 
 **Infrastructure**
-- Docker + docker-compose (containerized both services)
-- GitHub Actions for CI/CD (runs tests on every push)
-- Render for backend hosting
-- Vercel for frontend hosting
+- Docker + docker-compose
+- GitHub Actions CI (runs tests on every push)
+- Render (backend) + Vercel (frontend)
 
 ---
 
@@ -41,9 +83,9 @@ Users can register with one of three roles — admin, editor, or viewer. Once lo
 ```
 securevault/
 ├── backend/
-│   ├── main.py          # FastAPI app and routes
-│   ├── auth.py          # JWT and password logic
-│   ├── database.py      # SQLAlchemy models and helpers
+│   ├── main.py          # routes
+│   ├── auth.py          # JWT + password logic
+│   ├── database.py      # SQLAlchemy setup
 │   ├── models.py        # Pydantic schemas
 │   ├── requirements.txt
 │   └── tests/
@@ -63,13 +105,13 @@ securevault/
 
 ---
 
-## How to run locally
+## Run locally
 
 **Backend**
 ```bash
 cd backend
 python -m venv venv
-source venv/Scripts/activate   # Windows
+source venv/Scripts/activate  # on Windows
 pip install -r requirements.txt
 uvicorn main:app --reload
 ```
@@ -81,9 +123,9 @@ npm install
 npm run dev
 ```
 
-Then open http://localhost:5173 in your browser.
+Open `http://localhost:5173`
 
-**Or with Docker**
+**Or just Docker**
 ```bash
 docker-compose up --build
 ```
@@ -92,47 +134,31 @@ docker-compose up --build
 
 ## API endpoints
 
-| Method | Endpoint | Access |
-|--------|----------|--------|
-| POST | /register | Public |
-| POST | /login | Public |
-| GET | /dashboard | All logged-in users |
-| GET | /admin | Admin only |
-| GET | /editor | Admin + Editor |
+| Method | Endpoint | Who can use it |
+|--------|----------|----------------|
+| POST | `/register` | Public |
+| POST | `/login` | Public |
+| GET | `/dashboard` | Any logged in user |
+| GET | `/admin` | Admin only |
+| GET | `/editor` | Admin + Editor |
 
 ---
 
-## Role permissions
-
-| Role | Resources |
-|------|-----------|
-| Admin | user-management, all-files, settings, analytics |
-| Editor | edit-files, view-files, analytics |
-| Viewer | view-files |
-
----
-
-## Running tests
+## Tests
 
 ```bash
 cd backend
 pytest tests/ -v
 ```
 
-All 12 tests cover registration, login, token validation, role-based access, and edge cases like duplicate users and wrong passwords.
-
----
-
-## Deployment
-
-The backend is deployed on Render and the frontend is deployed on Vercel, connected to each other over HTTPS.
-
-CI/CD is set up with GitHub Actions — every push to main automatically runs the full test suite.
+Covers registration, login, token validation, role access, duplicate users, wrong passwords — 12 tests total.
 
 ---
 
 ## Why I built this
 
-I'm applying for the HENNGE Global Internship Program (Batch 4). HENNGE builds identity and access management tools for enterprises, and I wanted to build something that touches the same problem space — controlling who can access what, and making sure it's secure. SecureVault is my attempt at understanding that from the ground up.
+I'm applying for HENNGE's Global Internship Program (Batch 4). HENNGE makes identity and access management tools for enterprises, so I wanted to actually build something in that space rather than just read about it. SecureVault is me trying to understand that problem from scratch — how do you decide who gets access to what, and how do you enforce it properly?
 
-Built by Aditi — 3rd year BTech student from Kanpur, India.
+---
+
+*Built by Aditi — 3rd year BTech, Kanpur*
