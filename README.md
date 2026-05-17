@@ -13,44 +13,48 @@ You register with a role (Admin, Editor, or Viewer). After login, you only see w
 
 ---
 
-## Screenshots
+## 📸 Screenshots
 
-**Register — pick your role at signup**
+### Register — pick your role at signup
 
-![Register](register.png)
+![Register](screenshots/register.png)
 
-**Login page**
+### Login page
 
-![Login](login.png)
+![Login](screenshots/login.png)
 
-**After registering, redirects to login with a success message**
+### After registering, redirects to login with a success message
 
-![Login after register](login_success.png)
+![Login after register](screenshots/login_success.png)
+
+### Viewer dashboard — only view-files
+
+![Viewer Dashboard](screenshots/viewer_dashboard.png)
+
+### Editor dashboard — gets edit-files, view-files, and analytics
+
+![Editor Dashboard](screenshots/editor_dashboard.png)
+
+### Admin dashboard — full access + Admin Panel button
+
+![Admin Dashboard](screenshots/admin_dashboard.png)
+
+### Admin Panel — Manage Users, View Analytics, System Settings, Security Logs
+
+![Admin Panel](screenshots/admin_panel.png)
+
+### Registering as different roles
+
+| Register | Register as Admin | Register as Editor |
+|---|---|---|
+| ![Register](screenshots/register.png) | ![Admin](screenshots/register_admin.png) | ![Editor](screenshots/register_editor.png) |
 
 ---
 
-**Viewer dashboard — only `view-files`**
-
-![Viewer dashboard](viewer_dashboard.png)
-
-**Editor dashboard — gets `edit-files`, `view-files`, and `analytics`**
-
-![Editor dashboard](editor_dashboard.png)
-
-**Admin dashboard — full access + Admin Panel button**
-
-![Admin dashboard](admin_dashboard.png)
-
-**Admin Panel — Manage Users, View Analytics, System Settings, Security Logs**
-
-![Admin panel](admin_panel.png)
-
----
-
-## Role permissions
+## Role Permissions
 
 | Role | What they can access |
-|------|----------------------|
+|---|---|
 | Admin | user-management, all-files, settings, analytics + admin panel |
 | Editor | edit-files, view-files, analytics |
 | Viewer | view-files |
@@ -61,8 +65,8 @@ You register with a role (Admin, Editor, or Viewer). After login, you only see w
 
 **Backend**
 - FastAPI + Python
-- JWT auth with `python-jose`
-- `bcrypt` for password hashing
+- JWT auth with python-jose
+- bcrypt for password hashing
 - SQLite via SQLAlchemy
 - Pytest — 12 tests, all passing
 
@@ -78,7 +82,7 @@ You register with a role (Admin, Editor, or Viewer). After login, you only see w
 
 ---
 
-## Project structure
+## Project Structure
 
 ```
 securevault/
@@ -105,9 +109,9 @@ securevault/
 
 ---
 
-## Run locally
+## Run Locally
 
-**Backend**
+### Backend
 ```bash
 cd backend
 python -m venv venv
@@ -116,7 +120,7 @@ pip install -r requirements.txt
 uvicorn main:app --reload
 ```
 
-**Frontend**
+### Frontend
 ```bash
 cd frontend
 npm install
@@ -125,22 +129,22 @@ npm run dev
 
 Open `http://localhost:5173`
 
-**Or just Docker**
+### Or just Docker
 ```bash
 docker-compose up --build
 ```
 
 ---
 
-## API endpoints
+## API Endpoints
 
 | Method | Endpoint | Who can use it |
-|--------|----------|----------------|
-| POST | `/register` | Public |
-| POST | `/login` | Public |
-| GET | `/dashboard` | Any logged in user |
-| GET | `/admin` | Admin only |
-| GET | `/editor` | Admin + Editor |
+|---|---|---|
+| POST | /register | Public |
+| POST | /login | Public |
+| GET | /dashboard | Any logged in user |
+| GET | /admin | Admin only |
+| GET | /editor | Admin + Editor |
 
 ---
 
@@ -161,4 +165,4 @@ I'm applying for HENNGE's Global Internship Program (Batch 4). HENNGE makes iden
 
 ---
 
-*Built by Aditi — 3rd year BTech, Kanpur*
+Built by **Aditi** — 3rd year BTech, Kanpur
